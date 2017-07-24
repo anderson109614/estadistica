@@ -291,7 +291,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jTextField5" min="-2" pref="107" max="-2" attributes="0"/>
+                                              <Component id="jTextFieldmoda" min="-2" pref="107" max="-2" attributes="0"/>
                                               <Component id="jTextField6" min="-2" pref="109" max="-2" attributes="0"/>
                                               <Component id="jTextField_dediana_X" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
                                               <Component id="jTextField3" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
@@ -354,7 +354,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jTextField16" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
+                                              <Component id="jTextField16moday" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
                                               <Component id="jTextField17" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                                               <Component id="jTextField13" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
                                               <Component id="jTextField_dediana_Y" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
@@ -418,7 +418,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField16" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextField16moday" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -481,7 +481,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldmoda" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -606,7 +606,7 @@
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField5">
+        <Component class="javax.swing.JTextField" name="jTextFieldmoda">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
@@ -681,7 +681,7 @@
             <Property name="text" type="java.lang.String" value="MODA:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField16">
+        <Component class="javax.swing.JTextField" name="jTextField16moday">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>

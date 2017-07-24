@@ -95,7 +95,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jTextField_dediana_X = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        jTextFieldmoda = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
@@ -110,7 +110,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jTextField_dediana_Y = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jTextField16 = new javax.swing.JTextField();
+        jTextField16moday = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jTextField17 = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
@@ -329,7 +329,7 @@ public class Principal extends javax.swing.JFrame {
 
         jTextField_dediana_X.setEditable(false);
 
-        jTextField5.setEditable(false);
+        jTextFieldmoda.setEditable(false);
 
         jTextField6.setEditable(false);
 
@@ -359,7 +359,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel17.setText("MODA:");
 
-        jTextField16.setEditable(false);
+        jTextField16moday.setEditable(false);
 
         jLabel18.setText("DESVIACIÓN EST.:");
 
@@ -431,7 +431,7 @@ public class Principal extends javax.swing.JFrame {
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextFieldmoda, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jTextField_dediana_X, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -478,7 +478,7 @@ public class Principal extends javax.swing.JFrame {
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextField16moday, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jTextField_dediana_Y, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -525,7 +525,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
-                            .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField16moday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18)
@@ -575,7 +575,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldmoda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -1027,8 +1027,31 @@ double[] x,y;
             x[i]=Double.valueOf(jTableDatos.getValueAt(i,0).toString());
             y[i]=Double.valueOf(jTableDatos.getValueAt(i,1).toString());
         }
+        int maximavecesx=0;
+        int maximavecesy=0;
+        int modax=0;
+        int moday=0;
+        for (int i = 0; i < x.length ; i++) {
+            int vecesRepetidasx=0;   
+            int vecesRepetidasy=0; 
+            x[i]=Double.valueOf(jTableDatos.getValueAt(i,0).toString());
+            y[i]=Double.valueOf(jTableDatos.getValueAt(i,1).toString());
         
-        
+        for (int j = 0; j < x.length ; j++) {            
+            x[j]=Double.valueOf(jTableDatos.getValueAt(j,0).toString());
+            y[j]=Double.valueOf(jTableDatos.getValueAt(i,1).toString());
+            if(x[i]==x[j] && y[i]==y[j]){    
+                vecesRepetidasx++;
+                vecesRepetidasy++;
+            }if(vecesRepetidasx>maximavecesx && vecesRepetidasy>maximavecesy){
+                modax=(int)x[i];
+                moday=(int)y[i];
+            }
+        }
+        jTextFieldmoda.setText(String.valueOf(modax));
+        jTextField16moday.setText(String.valueOf(moday));
+        }
+        ////
         for (int i = 0; i < total; i++) {
             for (int j = 0; j < total; j++) {
                 if(x[i]>x[j]){
@@ -1242,7 +1265,7 @@ double[] x,y;
             }
         }
         jTextField1.setText("");jTextField_dediana_Y.setText("");
-        jTextField_ran_X.setText("");jTextField16.setText("");
+        jTextField_ran_X.setText("");jTextField16moday.setText("");
         jTextField_min_X.setText("");jTextField17.setText("");
         jTextField_max_X.setText("");jTextField18.setText("");
         jTextField13.setText("");jTextField19.setText("");
@@ -1261,7 +1284,7 @@ double[] x,y;
         jTextField31.setText("");jTextField31ls.setText("");
         jTextField32.setText("");jTextField32li.setText("");
         jTextField33.setText("");jTextField_dediana_X.setText("");
-        jTextField5.setText("");jTextField6.setText("");
+        jTextFieldmoda.setText("");jTextField6.setText("");
         jTextField7.setText("");jTextField8.setText("");
         jTextField9.setText("");jTextFieldSuma.setText("");
         jTextFieldSuma1.setText("");
@@ -1450,7 +1473,7 @@ double[] x,y;
             val--;
             ye[i]=b0+(xe[i]*b1);
         }
-        JFrame frame = new JFrame( "Uso de colores" );
+        JFrame frame = new JFrame( "Gráfica" );
         frame.setDefaultCloseOperation( JFrame.HIDE_ON_CLOSE );
         JPanelColor jPanelColor = new JPanelColor(xe,ye,x,y); // create JPanelColor
         frame.add( jPanelColor ); // agrega jPanelColor a marco
@@ -1615,7 +1638,7 @@ double[] x,y;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField16;
+    private javax.swing.JTextField jTextField16moday;
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
@@ -1640,7 +1663,6 @@ double[] x,y;
     private javax.swing.JTextField jTextField32;
     private javax.swing.JTextField jTextField32li;
     private javax.swing.JTextField jTextField33;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
@@ -1655,5 +1677,6 @@ double[] x,y;
     private javax.swing.JTextField jTextField_min_Y;
     private javax.swing.JTextField jTextField_ran_X;
     private javax.swing.JTextField jTextField_ran_Y;
+    private javax.swing.JTextField jTextFieldmoda;
     // End of variables declaration//GEN-END:variables
 }
