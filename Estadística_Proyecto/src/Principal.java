@@ -1557,52 +1557,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-       
+       Histo histo = new Histo("Histograma");
+    histo.pack();
+    RefineryUtilities.centerFrameOnScreen(histo);
+    histo.setVisible(true);
     }//GEN-LAST:event_jButton10ActionPerformed
-//    private IntervalXYDataset crearDataset() {
-//        HistogramDataset dataset = new HistogramDataset();
-//        int total = jTableDatos.getRowCount();
-//        x = new double[total];
-//        y = new double[total];
-//        for (int i = 0; i < total; i++) {
-//            x[i] = Double.valueOf(jTableDatos.getValueAt(i, 0).toString());
-//            y[i] = Double.valueOf(jTableDatos.getValueAt(i, 1).toString());
-//            dataset.addSeries("00", x, 10);
-//        }
-//
-//        return dataset;
-//    }
-//
-//    public JPanel crearPanel() {
-//        JFreeChart chart = crearChart(crearDataset());
-//        return new ChartPanel(chart);
-//    }
-//
-//    private JFreeChart crearChart(IntervalXYDataset dataset) {
-//        JFreeChart chart = ChartFactory.createHistogram("Histograma X", null, null, dataset, PlotOrientation.VERTICAL, true, true, false);
-//        XYPlot plot = (XYPlot) chart.getPlot();
-//        XYBarRenderer renderer = (XYBarRenderer) plot.getRenderer();
-//        renderer.setDrawBarOutline(false);
-//        return chart;
-//    }
-
-    public void tranferir(TransferHandler.TransferSupport info) throws UnsupportedFlavorException, IOException, BiffException {
-        try {
-            if (info.isDrop()) {
-                jTableDatos = (JTable) info.getComponent();
-            }
-            Transferable t = info.getTransferable();
-            File f = (File) t.getTransferData(DataFlavor.javaFileListFlavor);
-            try {
-                Workbook w = Workbook.getWorkbook(f);
-            } catch (BiffException ex) {
-                JOptionPane.showMessageDialog(this, ex);
-                //Logger.getLogger(Principal.class.getName().log(Level.SEVERE,null,ex));
-            }
-        } catch (UnsupportedFlavorException | IOException ex) {
-            JOptionPane.showMessageDialog(this, ex);
-        }
-    }
+    
 
     /**
      * @param args the command line arguments
