@@ -1557,10 +1557,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-       Histo histo = new Histo("Histograma");
-    histo.pack();
-    RefineryUtilities.centerFrameOnScreen(histo);
-    histo.setVisible(true);
+       Histo h= new Histo(x,y,5);      
     }//GEN-LAST:event_jButton10ActionPerformed
     
 

@@ -43,6 +43,7 @@ public class JPanelColor extends JPanel {
         int auxA = a / 2;
         int xL = auxL, yA = auxA - 3;
         int rep = auxL / 20;
+        int ac=1;
         for (int i = 0; i < rep; i++) {//escala x negativa
            
            if(i==0){
@@ -52,6 +53,13 @@ public class JPanelColor extends JPanel {
            }else{
             g.setColor(Color.GRAY);
             g.drawLine(xL, 0, xL, a);
+            if(ac==2){
+            g.setColor(Color.BLACK);
+            g.drawString(String.valueOf("-"+i), xL-5, yA+18);
+            ac=1;
+            }else{
+            ac++;    
+            }
            }
             g.setColor(Color.BLACK);
             g.drawLine(xL, yA, xL, yA + 6);
@@ -59,6 +67,7 @@ public class JPanelColor extends JPanel {
         }
         xL = auxL;
         yA = auxA - 3;
+        ac=1;
         for (int i = 0; i < rep; i++) {//escala x positiva
            
             if(i==0){
@@ -67,6 +76,13 @@ public class JPanelColor extends JPanel {
            }else{
             g.setColor(Color.GRAY);
             g.drawLine(xL, 0, xL, a);
+            if(ac==2){
+            g.setColor(Color.BLACK);
+            g.drawString(String.valueOf(i), xL-5, yA+18);
+            ac=1;
+            }else{
+            ac++;    
+            }
            }
              g.setColor(Color.BLACK);
             g.drawLine(xL, yA, xL, yA + 6);
@@ -75,6 +91,7 @@ public class JPanelColor extends JPanel {
         xL = auxL - 3;
         yA = auxA;
         rep = auxA / 20;
+        ac=1;
         for (int i = 0; i < rep; i++) {//escala y positiva
             if(i==0){
                g.setColor(Color.BLACK);
@@ -83,12 +100,21 @@ public class JPanelColor extends JPanel {
            }else{
             g.setColor(Color.GRAY);
             g.drawLine(0, yA, l, yA);
+            if(ac==2){
+            g.setColor(Color.BLACK);
+            g.drawString(String.valueOf("-"+i), xL+18, yA);
+            ac=1;
+            }else{
+            ac++;    
+            }
+            
            }
             g.setColor(Color.BLACK);
             g.drawLine(xL, yA, xL + 6, yA);
             yA += 20;
         }
         yA = auxA;
+        ac=1;
         for (int i = 0; i < rep; i++) {//escala y positiva
             if(i==0){
                g.setColor(Color.BLACK);
@@ -96,12 +122,18 @@ public class JPanelColor extends JPanel {
            }else{
             g.setColor(Color.GRAY);
             g.drawLine(0, yA, l, yA);
+            if(ac==2){
+            g.setColor(Color.BLACK);
+            g.drawString(String.valueOf(i), xL+18, yA);
+            ac=1;
+            }else{
+            ac++;    
+            }
            }
             g.setColor(Color.BLACK);
             g.drawLine(xL, yA, xL + 6, yA);
             yA -= 20;
         }
-
 //////////////rectificacion de valores para la funcion
    g.setColor(Color.BLACK);
         int[] xv = new int[x.length];
@@ -180,9 +212,11 @@ public class JPanelColor extends JPanel {
 
             g.drawLine(xv[i], yv[i], xv[i + 1], yv[i + 1]);
         }
+        g.setColor(Color.BLACK);
         for (int i = 0; i < yp.length; i++) {
             g.drawOval(xvp[i]-1, yvp[i]-1, 3, 3);
         }
+        this.setBackground(new Color(162,249,220));
 
     } // fin del método paintComponent
 

@@ -15,10 +15,11 @@ import javax.swing.JPanel;
  */
 public class Histograma extends JPanel {
     int v[];
+    String[] d;
 
-    Histograma(int[] val) {
+    Histograma(int[] val,String[] datos) {
         v = val;
-
+        d=datos;
     }
 
 // dibuja rectángulos y objetos String en distintos colores
@@ -61,46 +62,39 @@ public class Histograma extends JPanel {
         l = 50;
 
 //Rectificacion de valores
-        int v2[] = new int[4];
-        for (int i = 0; i < 4; i++) {
+        int v2[] = new int[v.length];
+        for (int i = 0; i < v.length; i++) {
             v2[i] = (300 * v[i]) / inci;
         }
 /// grafita de las figuras
-        for (int i = 0; i < 4; i++) {
+int inter=500/v.length;
+        for (int i = 0; i < v.length; i++) {
             g.setColor(Color.BLUE);
             g.fill3DRect(x, y - v2[i], l, v2[i],false);
             
-            x = x + 123;
+            x = x + inter;
 
         }
         ///////// colocacion de valores
         y1 = 360;
         x1 = 70;
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < v.length; i++) {
             g.setColor(Color.BLACK);
-            g.drawString("V"+String.valueOf(i+1),x1 ,y1);
+            g.drawString(d[i],x1-15 ,y1);
             g.drawString(String.valueOf(v[i]),x1 ,335-v2[i]);
-            x1 = x1+ 123;
+            x1 = x1+ inter;
         }
     } // fin del método paintComponent
 
     private int mayorLis() {
-        int m1, m2;
-        if (v[0] > v[1]) {
-            m1 = v[0];
-        } else {
-            m1 = v[0];
+        int m=v[0];
+        for (int i = 0; i < v.length; i++) {
+            if(m>v[i]){
+                
+            }else{
+                m=v[i];
+            }
         }
-        if (v[2] > v[3]) {
-            m2 = v[2];
-        } else {
-            m2 = v[3];
-        }
-        if (m1 > m2) {
-            return m1;
-        } else {
-            return m2;
-        }
-
+      return m;
     }
 }

@@ -4,6 +4,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -29,51 +30,89 @@ import org.jfree.ui.ApplicationFrame;
  *
  * @author Gaby
  */
-public class Histo extends ApplicationFrame {
+public class Histo {
 
-    int v[];
+    double[] x, y;
+    int n;
+    double fx, fy;
 
-    public Histo(String tittle) {
-        super(tittle);
-        JPanel chartPanel = crearPanel();
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 475));
-        setContentPane(chartPanel);
+    public Histo(double[] x, double[] y, int nclas) {
+        this.x = x;
+        this.y = y;
+        this.n = nclas;
+        frecuensia();
+        conteo();
+        graficas();
+        
     }
 
-    private static IntervalXYDataset crearDataset() {
-        HistogramDataset dataset = new HistogramDataset();
-//vecto almacena los ingresos quincenales de 45 personas
-        double vector[] = {63, 89, 36, 49, 56, 64, 59, 35, 78,
-            43, 53, 70, 57, 62, 43, 68, 62, 26,
-            64, 72, 52, 51, 62, 60, 71, 61, 55,
-            59, 60, 67, 57, 67, 61, 67, 51, 81,
-            53, 64, 76, 44, 73, 56, 62, 63, 60};
-//En el ejercicio nos piden construir una distribución de frecuencias de 8 intervalos
-//Por eso ponemos 8 en el tercer parámetro del addSeries
-        dataset.addSeries(" ", vector, 8);
-        return dataset;
+    public void frecuensia() {
+        fx = (x[0] - x[x.length - 1]) / n;
+        fy = (y[0] - y[y.length - 1]) / n;
+
+    }
+    int[] vectorX;
+    int[] vectorY;
+    String[] dx,dy;
+
+    public void conteo() {
+        vectorX = new int[n];
+       vectorY = new int[n];
+      dx=new String[n];
+      dy=new String[n];
+        double min = x[x.length - 1];//// conteo de x 
+        for (int i = 0; i < n; i++) {
+            int con=0;
+            for (int j = 0; j < x.length; j++) {
+                if (x[j] >= min && x[j] < (min + fx)) {
+                   
+                 con++;
+                }
+
+            }
+            double max=min+fx;
+            dx[i]=String.format("%.2f",min)+"-"+String.format("%.2f",max);
+             vectorX[i]=con;
+            min = min + fx;
+        }
+        
+        min = y[y.length - 1];//// conteo de y
+        for (int i = 0; i < n; i++) {
+            int con=0;
+            for (int j = 0; j < y.length; j++) {
+                if (y[j] >= min && y[j] < (min + fy)) {
+                   
+                 con++;
+                }
+
+            }
+            double max=min+fy;
+            dy[i]=String.format("%.2f",min)+"-"+String.format("%.2f",max);
+             vectorY[i]=con;
+            min = min + fy;
+        }
+
+
     }
 
-    private static JFreeChart crearChart(IntervalXYDataset dataset) {
-        JFreeChart chart = ChartFactory.createHistogram(
-                "Histograma",
-                null,
-                null,
-                dataset,
-                PlotOrientation.VERTICAL,
-                true,
-                true,
-                false
-        );
-        XYPlot plot = (XYPlot) chart.getPlot();
-        XYBarRenderer renderer = (XYBarRenderer) plot.getRenderer();
-        renderer.setDrawBarOutline(false);
-        return chart;
+    public void graficas(){
+        
+        JFrame frame = new JFrame("Histograma X");
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        Histograma jPanelColor = new Histograma(vectorX,dx); // create JPanelColor
+        frame.add(jPanelColor); // agrega jPanelColor a marco
+        frame.setSize(600, 400); // establece el tamaño del marco
+        frame.setVisible(true);
+        
+        
+         JFrame frameY = new JFrame("Histograma Y");
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        Histograma jPanelColorY = new Histograma(vectorY,dy); // create JPanelColor
+        frameY.add(jPanelColorY); // agrega jPanelColor a marco
+        frameY.setSize(600, 400); // establece el tamaño del marco
+        frameY.setVisible(true);
+        frameY.setLocation(500, 100);
     }
-
-    public static JPanel crearPanel() {
-        JFreeChart chart = crearChart(crearDataset());
-        return new ChartPanel(chart);
-    }
-
+    
+    
 }
