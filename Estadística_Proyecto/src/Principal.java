@@ -11,6 +11,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.TransferHandler;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -19,6 +20,15 @@ import javax.swing.table.TableModel;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYBarRenderer;
+import org.jfree.data.statistics.HistogramDataset;
+import org.jfree.data.xy.IntervalXYDataset;
+import org.jfree.ui.RefineryUtilities;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -31,15 +41,15 @@ import jxl.read.biff.BiffException;
  */
 public class Principal extends javax.swing.JFrame {
 
-    DefaultTableModel model;    
+    DefaultTableModel model;
     Object[] llenar = new Object[2];
 
     float suma = 0;
     float suma2 = 0;
     float suma3 = 0;
     float suma4 = 0;
-    float suma5=0;
-    float suma6=0;
+    float suma5 = 0;
+    float suma6 = 0;
     float suma1_1 = 0;
     float suma2_2 = 0;
     float suma3_3 = 0;
@@ -58,6 +68,8 @@ public class Principal extends javax.swing.JFrame {
         jTableDatos.setModel(model);
 
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -178,6 +190,7 @@ public class Principal extends javax.swing.JFrame {
         jTextField33 = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -412,7 +425,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
+                        .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
@@ -455,7 +468,7 @@ public class Principal extends javax.swing.JFrame {
                                         .addComponent(jTextField_min_X)
                                         .addComponent(jTextField_ran_X, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
+                        .addGap(39, 39, 39)
                         .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -501,16 +514,15 @@ public class Principal extends javax.swing.JFrame {
                                         .addComponent(jTextField_max_Y)
                                         .addComponent(jTextField_min_Y)
                                         .addComponent(jTextField_ran_Y, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62))))
+                        .addGap(70, 70, 70))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel29)
@@ -612,7 +624,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel14)
                             .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -946,6 +958,13 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton10.setText("Ver histograma");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -957,8 +976,13 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jButton10)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -971,6 +995,8 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton10)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1015,83 +1041,87 @@ public class Principal extends javax.swing.JFrame {
         calcularX();
         calcularY();
         ordenar_vector();
-        
-        
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
-double[] x,y;
-    private void ordenar_vector(){
+    double[] x, y;
+
+    private void ordenar_vector() {
         int total = jTableDatos.getRowCount();
         x = new double[total];
         y = new double[total];
         for (int i = 0; i < total; i++) {
-            x[i]=Double.valueOf(jTableDatos.getValueAt(i,0).toString());
-            y[i]=Double.valueOf(jTableDatos.getValueAt(i,1).toString());
+            x[i] = Double.valueOf(jTableDatos.getValueAt(i, 0).toString());
+            y[i] = Double.valueOf(jTableDatos.getValueAt(i, 1).toString());
         }
-        int maximavecesx=0;
-        int maximavecesy=0;
-        int modax=0;
-        int moday=0;
-        for (int i = 0; i < x.length ; i++) {
-            int vecesRepetidasx=0;   
-            int vecesRepetidasy=0; 
-            x[i]=Double.valueOf(jTableDatos.getValueAt(i,0).toString());
-            y[i]=Double.valueOf(jTableDatos.getValueAt(i,1).toString());
-        
-        for (int j = 0; j < x.length ; j++) {            
-            x[j]=Double.valueOf(jTableDatos.getValueAt(j,0).toString());
-            y[j]=Double.valueOf(jTableDatos.getValueAt(i,1).toString());
-            if(x[i]==x[j] && y[i]==y[j]){    
-                vecesRepetidasx++;
-                vecesRepetidasy++;
-            }if(vecesRepetidasx>maximavecesx && vecesRepetidasy>maximavecesy){
-                modax=(int)x[i];
-                moday=(int)y[i];
+        //moda
+        int maximavecesx = 0;
+        int maximavecesy = 0;
+        int modax = 0;
+        int moday = 0;
+        for (int i = 0; i < x.length; i++) {
+            int vecesRepetidasx = 0;
+            int vecesRepetidasy = 0;
+            x[i] = Double.valueOf(jTableDatos.getValueAt(i, 0).toString());
+            y[i] = Double.valueOf(jTableDatos.getValueAt(i, 1).toString());
+            for (int j = 0; j < x.length; j++) {
+                x[j] = Double.valueOf(jTableDatos.getValueAt(j, 0).toString());
+                y[j] = Double.valueOf(jTableDatos.getValueAt(j, 1).toString());
+                if (x[i] == x[j] && y[i] == y[j]) {
+                    vecesRepetidasx++;
+                    vecesRepetidasy++;
+                }
+                if (vecesRepetidasx > maximavecesx && vecesRepetidasy > maximavecesy) {
+                    modax = (int) x[i];
+                    moday = (int) y[i];
+                }
             }
+            jTextFieldmoda.setText(String.valueOf(modax));
+           jTextField16moday.setText(String.valueOf(moday));
         }
-        jTextFieldmoda.setText(String.valueOf(modax));
-        jTextField16moday.setText(String.valueOf(moday));
-        }
+        ////
         ////
         for (int i = 0; i < total; i++) {
             for (int j = 0; j < total; j++) {
-                if(x[i]>x[j]){
+                if (x[i] > x[j]) {
                     //Intercambiamos valores
-                    double variableauxiliar=x[i];
-                    x[i]=x[j];
-                    x[j]=variableauxiliar;
- 
+                    double variableauxiliar = x[i];
+                    x[i] = x[j];
+                    x[j] = variableauxiliar;
+
                 }
-                if(y[i]>y[j]){
+                if (y[i] > y[j]) {
                     //Intercambiamos valores
-                    double variableauxiliar=y[i];
-                    y[i]=y[j];
-                    y[j]=variableauxiliar;
- 
+                    double variableauxiliar = y[i];
+                    y[i] = y[j];
+                    y[j] = variableauxiliar;
+
                 }
             }
         }
-        int div=total % 2;
+        int div = total % 2;
         //JOptionPane.showMessageDialog(this, "total = "+total+" div= "+div);
-        if(div==0){
-            int med=total/2;
-            float sumX=(float)(x[med]+x[med-1])/2;
-            float sumY=(float)(y[med]+y[med-1])/2;
+        if (div == 0) {
+            int med = total / 2;
+            float sumX = (float) (x[med] + x[med - 1]) / 2;
+            float sumY = (float) (y[med] + y[med - 1]) / 2;
             jTextField_dediana_X.setText((String.valueOf(sumX)));
-           jTextField_dediana_Y.setText((String.valueOf(sumY)));
-        }else{
-            int med= (total/2);
-           jTextField_dediana_X.setText((String.valueOf(x[med])));
-           jTextField_dediana_Y.setText((String.valueOf(y[med])));
+            jTextField_dediana_Y.setText((String.valueOf(sumY)));
+        } else {
+            int med = (total / 2);
+            jTextField_dediana_X.setText((String.valueOf(x[med])));
+            jTextField_dediana_Y.setText((String.valueOf(y[med])));
         }
         ////
-        jTextField_min_X.setText((String.valueOf(x[total-1])));
-        jTextField_min_Y.setText((String.valueOf(y[total-1])));
+        jTextField_min_X.setText((String.valueOf(x[total - 1])));
+        jTextField_min_Y.setText((String.valueOf(y[total - 1])));
         jTextField_max_X.setText((String.valueOf(x[0])));
         jTextField_max_Y.setText((String.valueOf(y[0])));
-        
-        jTextField_ran_X.setText(String.valueOf(x[0]-x[total-1]));
-        jTextField_ran_Y.setText(String.valueOf(y[0]-y[total-1]));
+
+        jTextField_ran_X.setText(String.valueOf(x[0] - x[total - 1]));
+        jTextField_ran_Y.setText(String.valueOf(y[0] - y[total - 1]));
     }
+
     private void calcularY() throws NumberFormatException {
         double sumatoria1 = 0.0;
         int totalRow = jTableDatos.getRowCount();
@@ -1104,7 +1134,7 @@ double[] x,y;
             jTextFieldSuma1.setText(String.valueOf(sumatoria1));
         }
         //media
-        float media = (float)sumatoria1 / jTableDatos.getRowCount();
+        float media = (float) sumatoria1 / jTableDatos.getRowCount();
         jTextField13.setText(String.valueOf(media));
         //mediana
         //moda
@@ -1149,7 +1179,7 @@ double[] x,y;
         float coef = coe / ((totalRow) * (totalRow - 1));
         jTextField20.setText(String.valueOf(coef));
         //       
-    
+
     }
     
     private void calcularX() throws NumberFormatException {
@@ -1164,7 +1194,7 @@ double[] x,y;
             jTextFieldSuma.setText(String.valueOf(sumatoria1));
         }
         //media
-        float media = (float)sumatoria1 / jTableDatos.getRowCount();
+        float media = (float) sumatoria1 / jTableDatos.getRowCount();
         jTextField3.setText(String.valueOf(media));
         //mediana
         //moda
@@ -1210,7 +1240,6 @@ double[] x,y;
         jTextField9.setText(String.valueOf(coef));
     }
 
-    
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         JFileChooser cargar = new JFileChooser();
@@ -1264,32 +1293,53 @@ double[] x,y;
                 model.removeRow(model.getRowCount() - 1);
             }
         }
-        jTextField1.setText("");jTextField_dediana_Y.setText("");
-        jTextField_ran_X.setText("");jTextField16moday.setText("");
-        jTextField_min_X.setText("");jTextField17.setText("");
-        jTextField_max_X.setText("");jTextField18.setText("");
-        jTextField13.setText("");jTextField19.setText("");
-        jTextField14.setText("");jTextField2.setText("");
-        
-        jTextField20.setText("");jTextField_ran_Y.setText("");
-        jTextField_min_Y.setText("");jTextField_max_Y.setText("");
-        jTextField24.setText("");jTextField25a.setText("");
-        jTextField25b0.setText("");jTextField26b.setText("");
-        jTextField26b1.setText("");jTextField27.setText("");
-        jTextField27c.setText("");jTextField28.setText("");
-        jTextField28d.setText("");jTextField29m.setText("");
-        
-        jTextField29xx.setText("");jTextField3.setText("");
-        jTextField30.setText("");jTextField30d.setText("");
-        jTextField31.setText("");jTextField31ls.setText("");
-        jTextField32.setText("");jTextField32li.setText("");
-        jTextField33.setText("");jTextField_dediana_X.setText("");
-        jTextFieldmoda.setText("");jTextField6.setText("");
-        jTextField7.setText("");jTextField8.setText("");
-        jTextField9.setText("");jTextFieldSuma.setText("");
+        jTextField1.setText("");
+        jTextField_dediana_Y.setText("");
+        jTextField_ran_X.setText("");
+        jTextField16moday.setText("");
+        jTextField_min_X.setText("");
+        jTextField17.setText("");
+        jTextField_max_X.setText("");
+        jTextField18.setText("");
+        jTextField13.setText("");
+        jTextField19.setText("");
+        jTextField14.setText("");
+        jTextField2.setText("");
+
+        jTextField20.setText("");
+        jTextField_ran_Y.setText("");
+        jTextField_min_Y.setText("");
+        jTextField_max_Y.setText("");
+        jTextField24.setText("");
+        jTextField25a.setText("");
+        jTextField25b0.setText("");
+        jTextField26b.setText("");
+        jTextField26b1.setText("");
+        jTextField27.setText("");
+        jTextField27c.setText("");
+        jTextField28.setText("");
+        jTextField28d.setText("");
+        jTextField29m.setText("");
+
+        jTextField29xx.setText("");
+        jTextField3.setText("");
+        jTextField30.setText("");
+        jTextField30d.setText("");
+        jTextField31.setText("");
+        jTextField31ls.setText("");
+        jTextField32.setText("");
+        jTextField32li.setText("");
+        jTextField33.setText("");
+        jTextField_dediana_X.setText("");
+        jTextFieldmoda.setText("");
+        jTextField6.setText("");
+        jTextField7.setText("");
+        jTextField8.setText("");
+        jTextField9.setText("");
+        jTextFieldSuma.setText("");
         jTextFieldSuma1.setText("");
-                
-        
+
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -1298,49 +1348,49 @@ double[] x,y;
         totalRow -= 1;
         for (int i = 0; i <= (totalRow); i++) {
             double sumatoria = Double.parseDouble(String.valueOf(jTableDatos.getValueAt(i, 0)));
-            sumatoria2 += sumatoria;            
+            sumatoria2 += sumatoria;
         }
         //media
-        float media = (float)sumatoria2 / jTableDatos.getRowCount();       
+        float media = (float) sumatoria2 / jTableDatos.getRowCount();
         //Desviacion estandar
         for (int i = 0; i <= (totalRow); i++) {
             float dato = Float.parseFloat(String.valueOf(jTableDatos.getValueAt(i, 0)));
             float res = (float) Math.pow((dato - media), 2);
             suma5 = suma5 + res;
         }
-        float desv = (float) Math.sqrt(suma5 / totalRow);  
-        
+        float desv = (float) Math.sqrt(suma5 / totalRow);
+
         //
-        if(jComboBox1.getSelectedItem() == "90%"){
+        if (jComboBox1.getSelectedItem() == "90%") {
             jTextField25a.setText(String.valueOf(media));
             jTextField26b.setText(String.valueOf(desv));
-            float sigma=(float)(1-0.9)/2;
-            float z=(float)1.645;
-            float lims=(float)(media+z*(desv/Math.sqrt(jTableDatos.getRowCount())));
-            float limi=(float)(media-z*(desv/Math.sqrt(jTableDatos.getRowCount())));
-            jTextField27c.setText(String.valueOf(lims));
-            jTextField28d.setText(String.valueOf(limi));
-        }            
-        if(jComboBox1.getSelectedItem() == "95%"){
-//            jTextField25a.setText(String.valueOf(media));
-//            jTextField26b.setText(String.valueOf(desv));
-            float sigma=(float)(1-0.95)/2;
-            float z=(float)1.96;
-            float lims=(float)(media+z*(desv/Math.sqrt(jTableDatos.getRowCount())));
-            float limi=(float)(media-z*(desv/Math.sqrt(jTableDatos.getRowCount())));
+            float sigma = (float) (1 - 0.9) / 2;
+            float z = (float) 1.645;
+            float lims = (float) (media + z * (desv / Math.sqrt(jTableDatos.getRowCount())));
+            float limi = (float) (media - z * (desv / Math.sqrt(jTableDatos.getRowCount())));
             jTextField27c.setText(String.valueOf(lims));
             jTextField28d.setText(String.valueOf(limi));
         }
-        if(jComboBox1.getSelectedItem() == "99%"){
+        if (jComboBox1.getSelectedItem() == "95%") {
 //            jTextField25a.setText(String.valueOf(media));
 //            jTextField26b.setText(String.valueOf(desv));
-            float sigma=(float)(1-0.99)/2;
-            float z=(float)2.575;
-            float lims=(float)(media+z*(desv/Math.sqrt(jTableDatos.getRowCount())));
-            float limi=(float)(media-z*(desv/Math.sqrt(jTableDatos.getRowCount())));
+            float sigma = (float) (1 - 0.95) / 2;
+            float z = (float) 1.96;
+            float lims = (float) (media + z * (desv / Math.sqrt(jTableDatos.getRowCount())));
+            float limi = (float) (media - z * (desv / Math.sqrt(jTableDatos.getRowCount())));
             jTextField27c.setText(String.valueOf(lims));
             jTextField28d.setText(String.valueOf(limi));
-        }        
+        }
+        if (jComboBox1.getSelectedItem() == "99%") {
+//            jTextField25a.setText(String.valueOf(media));
+//            jTextField26b.setText(String.valueOf(desv));
+            float sigma = (float) (1 - 0.99) / 2;
+            float z = (float) 2.575;
+            float lims = (float) (media + z * (desv / Math.sqrt(jTableDatos.getRowCount())));
+            float limi = (float) (media - z * (desv / Math.sqrt(jTableDatos.getRowCount())));
+            jTextField27c.setText(String.valueOf(lims));
+            jTextField28d.setText(String.valueOf(limi));
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTextField32liActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField32liActionPerformed
@@ -1355,10 +1405,10 @@ double[] x,y;
         //
         for (int i = 0; i <= (totalRow); i++) {
             double sumatoria = Double.parseDouble(String.valueOf(jTableDatos.getValueAt(i, 1)));
-            sumatoria1 += sumatoria;            
+            sumatoria1 += sumatoria;
         }
         //media
-        float media = (float)sumatoria1 / jTableDatos.getRowCount();        
+        float media = (float) sumatoria1 / jTableDatos.getRowCount();
         //Desviacion estandar
         for (int i = 0; i <= (totalRow); i++) {
             float dato = Float.parseFloat(String.valueOf(jTableDatos.getValueAt(i, 1)));
@@ -1367,33 +1417,33 @@ double[] x,y;
         }
         float desv = (float) Math.sqrt(suma6 / totalRow);
         //
-        if(jComboBox2.getSelectedItem() == "90%"){
+        if (jComboBox2.getSelectedItem() == "90%") {
             jTextField29m.setText(String.valueOf(media));
             jTextField30d.setText(String.valueOf(desv));
-            float sigma=(float)(1-0.9)/2;
-            float z=(float)1.645;
-            float lims=(float)(media+z*(desv/Math.sqrt(jTableDatos.getRowCount())));
-            float limi=(float)(media-z*(desv/Math.sqrt(jTableDatos.getRowCount())));
-            jTextField31ls.setText(String.valueOf(lims));
-            jTextField32li.setText(String.valueOf(limi));
-        }            
-        if(jComboBox2.getSelectedItem() == "95%"){   
-//            jTextField29m.setText(String.valueOf(media));
-//            jTextField30d.setText(String.valueOf(desv));
-            float sigma=(float)(1-0.95)/2;
-            float z=(float)1.96;
-            float lims=(float)(media+z*(desv/Math.sqrt(jTableDatos.getRowCount())));
-            float limi=(float)(media-z*(desv/Math.sqrt(jTableDatos.getRowCount())));
+            float sigma = (float) (1 - 0.9) / 2;
+            float z = (float) 1.645;
+            float lims = (float) (media + z * (desv / Math.sqrt(jTableDatos.getRowCount())));
+            float limi = (float) (media - z * (desv / Math.sqrt(jTableDatos.getRowCount())));
             jTextField31ls.setText(String.valueOf(lims));
             jTextField32li.setText(String.valueOf(limi));
         }
-        if(jComboBox2.getSelectedItem() == "99%"){  
+        if (jComboBox2.getSelectedItem() == "95%") {
 //            jTextField29m.setText(String.valueOf(media));
 //            jTextField30d.setText(String.valueOf(desv));
-            float sigma=(float)(1-0.99)/2;
-            float z=(float)2.575;
-            float lims=(float)(media+z*(desv/Math.sqrt(jTableDatos.getRowCount())));
-            float limi=(float)(media-z*(desv/Math.sqrt(jTableDatos.getRowCount())));
+            float sigma = (float) (1 - 0.95) / 2;
+            float z = (float) 1.96;
+            float lims = (float) (media + z * (desv / Math.sqrt(jTableDatos.getRowCount())));
+            float limi = (float) (media - z * (desv / Math.sqrt(jTableDatos.getRowCount())));
+            jTextField31ls.setText(String.valueOf(lims));
+            jTextField32li.setText(String.valueOf(limi));
+        }
+        if (jComboBox2.getSelectedItem() == "99%") {
+//            jTextField29m.setText(String.valueOf(media));
+//            jTextField30d.setText(String.valueOf(desv));
+            float sigma = (float) (1 - 0.99) / 2;
+            float z = (float) 2.575;
+            float lims = (float) (media + z * (desv / Math.sqrt(jTableDatos.getRowCount())));
+            float limi = (float) (media - z * (desv / Math.sqrt(jTableDatos.getRowCount())));
             jTextField31ls.setText(String.valueOf(lims));
             jTextField32li.setText(String.valueOf(limi));
         }
@@ -1402,38 +1452,38 @@ double[] x,y;
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         double sumatoria1 = 0.0;
         double sumatoria2 = 0.0;
-        double sumat= 0.0;
-        double yysum=0.0;
-        double xcuadrado=0.0;
-        double ycuadrado=0.0;
-        double sumaxy=0.0;
-        double sumae=0.0;
-        int totalRow = jTableDatos.getRowCount();        
+        double sumat = 0.0;
+        double yysum = 0.0;
+        double xcuadrado = 0.0;
+        double ycuadrado = 0.0;
+        double sumaxy = 0.0;
+        double sumae = 0.0;
+        int totalRow = jTableDatos.getRowCount();
         totalRow -= 1;
         //
         for (int i = 0; i <= (totalRow); i++) {
             double dato = Double.parseDouble(String.valueOf(jTableDatos.getValueAt(i, 0)));
             double dato1 = Double.parseDouble(String.valueOf(jTableDatos.getValueAt(i, 1)));
-            float xcua=(float)Math.pow(dato, 2);
-            float ycua=(float)Math.pow(dato1, 2);
-            float xy=(float)(dato*dato1);
+            float xcua = (float) Math.pow(dato, 2);
+            float ycua = (float) Math.pow(dato1, 2);
+            float xy = (float) (dato * dato1);
             //suma de cada valor de x al cuadrado
-            xcuadrado+=xcua;
-            ycuadrado+=ycua;
+            xcuadrado += xcua;
+            ycuadrado += ycua;
             //suma de cada valor de x
-            sumatoria1 += dato;   
-            sumatoria2 += dato1; 
-            sumaxy+=xy;
+            sumatoria1 += dato;
+            sumatoria2 += dato1;
+            sumaxy += xy;
         }
         //media
-        float mediax = (float)sumatoria1 / jTableDatos.getRowCount();
-        float mediay = (float)sumatoria2 / jTableDatos.getRowCount(); 
+        float mediax = (float) sumatoria1 / jTableDatos.getRowCount();
+        float mediay = (float) sumatoria2 / jTableDatos.getRowCount();
         //
-        float sxx=(float)(xcuadrado-((Math.pow(sumatoria1, 2))/jTableDatos.getRowCount()));
-        float syy=(float)(ycuadrado-((Math.pow(sumatoria2, 2))/jTableDatos.getRowCount()));
-        float sxy=(float)(sumaxy-((sumatoria1*sumatoria2)/jTableDatos.getRowCount()));
-        float r=(float)(sxy/Math.sqrt(sxx*syy));
-        float r2=(float)Math.pow(r, 2);
+        float sxx = (float) (xcuadrado - ((Math.pow(sumatoria1, 2)) / jTableDatos.getRowCount()));
+        float syy = (float) (ycuadrado - ((Math.pow(sumatoria2, 2)) / jTableDatos.getRowCount()));
+        float sxy = (float) (sumaxy - ((sumatoria1 * sumatoria2) / jTableDatos.getRowCount()));
+        float r = (float) (sxy / Math.sqrt(sxx * syy));
+        float r2 = (float) Math.pow(r, 2);
         jTextField29xx.setText(String.valueOf(sxx));
         jTextField30.setText(String.valueOf(syy));
         jTextField31.setText(String.valueOf(sxy));
@@ -1441,44 +1491,44 @@ double[] x,y;
         jTextField33.setText(String.valueOf(r2));
         for (int i = 0; i <= (totalRow); i++) {
             double dato = Double.parseDouble(String.valueOf(jTableDatos.getValueAt(i, 0)));
-            float xx=(float)dato-mediax;
-            float xx1=(float)Math.pow(xx, 2);
-            yysum+=xx1;
+            float xx = (float) dato - mediax;
+            float xx1 = (float) Math.pow(xx, 2);
+            yysum += xx1;
             double dato1 = Double.parseDouble(String.valueOf(jTableDatos.getValueAt(i, 1)));
-            float yy=(float)dato1-mediay;            
-            sumat+=xx*yy;            
+            float yy = (float) dato1 - mediay;
+            sumat += xx * yy;
         }
-        b1=(float)(sumat/yysum);
+        b1 = (float) (sumat / yysum);
         jTextField25b0.setText(String.valueOf(b1));
-        b0=mediay-(b1*mediax);
+        b0 = mediay - (b1 * mediax);
         jTextField26b1.setText(String.valueOf(b0));
-        jTextField27.setText(b0+" + "+b1+"x");
+        jTextField27.setText(b0 + " + " + b1 + "x");
         for (int i = 0; i <= (totalRow); i++) {
-            double datox = Double.parseDouble(String.valueOf(jTableDatos.getValueAt(i, 0)));          
-            float yestimado=(float)(b0+(b1*datox));
+            double datox = Double.parseDouble(String.valueOf(jTableDatos.getValueAt(i, 0)));
+            float yestimado = (float) (b0 + (b1 * datox));
             //sumae+=Math.pow(yestimado, 2);
-            double datoy = Double.parseDouble(String.valueOf(jTableDatos.getValueAt(i, 1))); 
-            float restae=(float)datoy-yestimado;
-            sumae+=Math.pow(restae, 2);
+            double datoy = Double.parseDouble(String.valueOf(jTableDatos.getValueAt(i, 1)));
+            float restae = (float) datoy - yestimado;
+            sumae += Math.pow(restae, 2);
         }
         jTextField28.setText(String.valueOf(sumae));
     }//GEN-LAST:event_jButton8ActionPerformed
-    float b0,b1;
+    float b0, b1;
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-         double[] xe=new double[30];
-         double[] ye=new double[30];
-         int val=15;
+        double[] xe = new double[30];
+        double[] ye = new double[30];
+        int val = 15;
         for (int i = 0; i < 30; i++) {
-            xe[i]=val;
+            xe[i] = val;
             val--;
-            ye[i]=b0+(xe[i]*b1);
+            ye[i] = b0 + (xe[i] * b1);
         }
-        JFrame frame = new JFrame( "Gráfica" );
-        frame.setDefaultCloseOperation( JFrame.HIDE_ON_CLOSE );
-        JPanelColor jPanelColor = new JPanelColor(xe,ye,x,y); // create JPanelColor
-        frame.add( jPanelColor ); // agrega jPanelColor a marco
-        frame.setSize( 1000, 700 ); // establece el tamaño del marco
-        frame.setVisible( true ); // muestra el marco 
+        JFrame frame = new JFrame("Gráfica");
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        JPanelColor jPanelColor = new JPanelColor(xe, ye, x, y); // create JPanelColor
+        frame.add(jPanelColor); // agrega jPanelColor a marco
+        frame.setSize(1000, 700); // establece el tamaño del marco
+        frame.setVisible(true); // muestra el marco 
 
 ////        if(jEditorPane_Estru_Ecu.getText().equals("")){
 ////            JOptionPane.showMessageDialog(this,"No existe ecuacion a graficar.....!!");
@@ -1505,6 +1555,37 @@ double[] x,y;
 //        frame.setVisible( true ); // muestra el marco 
 //        }
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+       
+    }//GEN-LAST:event_jButton10ActionPerformed
+//    private IntervalXYDataset crearDataset() {
+//        HistogramDataset dataset = new HistogramDataset();
+//        int total = jTableDatos.getRowCount();
+//        x = new double[total];
+//        y = new double[total];
+//        for (int i = 0; i < total; i++) {
+//            x[i] = Double.valueOf(jTableDatos.getValueAt(i, 0).toString());
+//            y[i] = Double.valueOf(jTableDatos.getValueAt(i, 1).toString());
+//            dataset.addSeries("00", x, 10);
+//        }
+//
+//        return dataset;
+//    }
+//
+//    public JPanel crearPanel() {
+//        JFreeChart chart = crearChart(crearDataset());
+//        return new ChartPanel(chart);
+//    }
+//
+//    private JFreeChart crearChart(IntervalXYDataset dataset) {
+//        JFreeChart chart = ChartFactory.createHistogram("Histograma X", null, null, dataset, PlotOrientation.VERTICAL, true, true, false);
+//        XYPlot plot = (XYPlot) chart.getPlot();
+//        XYBarRenderer renderer = (XYBarRenderer) plot.getRenderer();
+//        renderer.setDrawBarOutline(false);
+//        return chart;
+//    }
+
     public void tranferir(TransferHandler.TransferSupport info) throws UnsupportedFlavorException, IOException, BiffException {
         try {
             if (info.isDrop()) {
@@ -1569,6 +1650,7 @@ double[] x,y;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
