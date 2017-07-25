@@ -33,8 +33,8 @@ public class Histo extends ApplicationFrame {
 
     int v[];
 
-    public Histo(String tittle) {
-        super(tittle);
+    public Histo(int[] valor) {
+        v=valor;
         JPanel chartPanel = crearPanel();
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 475));
         setContentPane(chartPanel);
